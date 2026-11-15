@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ESP Debug V12</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101820;color:white;font-family:Arial}
+h2{text-align:center;color:#00ff88}
+.panel{margin:10px;padding:14px;background:#202d38;border-radius:12px}
+button{padding:12px;margin:4px;border:0;border-radius:9px;background:#00cc77;color:#001b10;font-weight:bold}
+input,select{padding:10px;margin:5px;border-radius:7px;max-width:100%}
+canvas{width:calc(100% - 20px);height:65vh;margin:10px;background:#17232d;border-radius:12px;display:block;touch-action:none}
+.status{text-align:center;color:#00ff88}
+.player{border-top:1px solid #40505c;padding-top:10px;margin-top:10px}
+</style>
+</head>
+<body>
+<h2>ESP DEBUG V12</h2>
+
+<div class="panel">
+  <h3>PLAYER EDITOR</h3>
+  <input id="newName" placeholder="Player name">
+  <select id="newTeam">
+    <option value="Friendly">Friendly</option>
+    <option value="Enemy">Enemy</option>
+  </select>
+  <button onclick="addPlayer()">ADD PLAYER</button>
+  <button onclick="resetAll()">RESET ALL</button>
+  <button onclick="exportPlayers()">EXPORT JSON</button>
+  <button onclick="document.getElementById('importFile').click()">IMPORT JSON</button>
+  <input id="importFile" type="file" accept=".json,application/json"
+   style="display:none" onchange="importPlayers(this)">
+  <button onclick="clearBackup()">CLEAR BACKUP</button>
+  <p id="playerStats">Total: 0 | Friendly: 0 | Enemy: 0</p>
+  <p class="status" id="status">EDITOR READY</p>
+</div>
+
+<div class="panel">
+  <button onclick="zoomIn()">ZOOM +</button>
+  <button onclick="zoomOut()">ZOOM -</button>
+  <button onclick="toggleRadar()">RADAR ON/OFF</button>
+  <p>Zoom: <span id="zoomText">1.0x</span></p>
+  <label><input type="checkbox" id="showNames" checked> Player Names</label>
+  <label><input type="checkbox" id="showBoxes" checked> Player Boxes</label>
+  <label><input type="checkbox" id="showSkeleton" checked> Skeleton Demo</label>
+</div>
+
+<div class="panel">
+  <h3>PLAYER LIST</h3>
+  <div id="playerList"></div>
+</div>
+
+<canvas id="screen"></canvas>
+
+<script src="esp_v12.js"></script>
+</body>
+</html>
